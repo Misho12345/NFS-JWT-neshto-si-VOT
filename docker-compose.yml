@@ -1,0 +1,63 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    command: start-dev
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - DB_VENDOR=h2
+      - KC_HOSTNAME=localhost
+      - KC_HOSTNAME_STRICT=false
+      - KC_HOSTNAME_STRICT_HTTPS=false
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+
+  app:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: file_manager_app
+    environment:
+      - FLASK_ENV=development
+      - PORT=5000
+      - KEYCLOAK_SERVER_URL=http://localhost:8080
+      - KEYCLOAK_REALM=file-manager
+      - KEYCLOAK_CLIENT_ID=file-manager-client
+    ports:
+      - "5000:5000"
+    volumes:
+      - nfs_data:/app/nfs:rw
+      - ./src/.env:/app/.env
+    networks:
+      - app-network
+    depends_on:
+      - keycloak
+      - nfs
+
+  nfs:
+    image: itsthenetwork/nfs-server-alpine:latest
+    container_name: nfs_server
+    privileged: true
+    environment:
+      - SHARED_DIRECTORY=/nfsshare
+    volumes:
+      - nfs_data:/nfsshare
+    networks:
+      - app-network
+    cap_add:
+      - SYS_ADMIN
+      - SETPCAP
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  keycloak_data:
+  nfs_data:
+    driver: local

@@ -1,0 +1,6 @@
+flask
+flask-cors
+python-keycloak
+python-jose
+python-dotenv
+werkzeug
