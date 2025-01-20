@@ -143,3 +143,18 @@ curl -X GET \
      -o <output-path> \
      http://localhost:5000/download/<filename>
 ```
+
+### 7. Read file content
+```bash
+curl -X GET \
+     -H "Authorization: Bearer <access-token>" \
+     http://localhost:5000/file/<filename>
+```
+
+Response:
+```json
+{
+    "filename": "example.txt",
+    "content": "file content"
+}
+```
