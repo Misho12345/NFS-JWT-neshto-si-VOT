@@ -6,7 +6,74 @@
     <link rel="stylesheet" href="static/css/styles.css"/>
 </head>
 <body>
-<h1>aaaaaaaaaaaaaaaaaaaaaaaaaa</h1>
+<div class="container">
+    <div id="login-screen" class="screen active">
+        <h2>Login</h2>
+        <div class="form-row">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter username"/>
+        </div>
+        <div class="form-row">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter password"/>
+        </div>
+        <button id="login-btn">Login</button>
+        <div id="login-message" class="message"></div>
+    </div>
+
+    <div id="file-manager-screen" class="screen">
+        <h2>File Manager</h2>
+        <div class="top-bar">
+            <button id="logout-btn" class="secondary-button">Logout</button>
+        </div>
+        <hr/>
+
+        <div class="section">
+            <h3>List Files</h3>
+            <button id="list-files-btn">Refresh File List</button>
+            <ul id="file-list"></ul>
+        </div>
+        <hr/>
+
+        <div class="section">
+            <h3>Upload File</h3>
+            <input type="file" id="upload-input"/>
+            <button id="upload-btn">Upload</button>
+            <p id="upload-status" class="message"></p>
+        </div>
+        <hr/>
+
+        <div class="section">
+            <h3>Edit File</h3>
+            <label for="edit-filename">Filename:</label>
+            <input type="text" id="edit-filename" placeholder="example.txt"/>
+            <br/>
+            <label for="edit-content">New Content:</label>
+            <textarea id="edit-content" rows="4" placeholder="Write new file content here..."></textarea>
+            <br/>
+            <button id="edit-btn">Save Changes</button>
+            <p id="edit-message" class="message"></p>
+        </div>
+        <hr/>
+
+        <div class="section">
+            <h3>Delete File</h3>
+            <label for="delete-filename">Filename:</label>
+            <input type="text" id="delete-filename" placeholder="example.txt"/>
+            <button id="delete-btn" class="danger-button">Delete</button>
+            <p id="delete-message" class="message"></p>
+        </div>
+        <hr/>
+
+        <div class="section">
+            <h3>Download File</h3>
+            <label for="download-filename">Filename:</label>
+            <input type="text" id="download-filename" placeholder="example.txt"/>
+            <button id="download-btn">Download</button>
+            <p id="download-message" class="message"></p>
+        </div>
+    </div>
+</div>
 
 <script src="static/js/script.js"></script>
 </body>
