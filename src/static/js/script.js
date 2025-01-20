@@ -149,7 +149,7 @@ async function handleLogin() {
 
         const data = await response.json();
         if (data.access_token) {
-            accessToaken = data.access_token;
+            accessToken = data.access_token;
             setTokenCookie(data.access_token, data.expires_in);
             showFileManagerScreen();
             clearFormData();
